@@ -11,12 +11,7 @@ module.exports = (sequelize, Model, DataTypes) => {
   }
   User.init(
     {
-      firstName: {
-        type: DataTypes.STRING(100),
-        defaultValue: false,
-        allowNull: false,
-      },
-      lastName: {
+      username: {
         type: DataTypes.STRING(100),
         defaultValue: false,
         allowNull: false,
@@ -40,8 +35,12 @@ module.exports = (sequelize, Model, DataTypes) => {
   );
 
   User.beforeCreate(async (user, options) => {
-    const hashedPassword = await bcrypt.hash(user.password);
-    user.password = hashedPassword;
+    try {
+      const hashedPassword = await bcrypt.hash(user.password, 10);
+      return (user.password = hashedPassword);
+    } catch (error) {
+      console.log("before", error);
+    }
   });
 
   return User;

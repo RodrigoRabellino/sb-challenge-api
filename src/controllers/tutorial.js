@@ -67,6 +67,7 @@ const update = async (req, res) => {
   if (data.videoUrl && !validUrl.isWebUri(videoUrl)) {
     return res.status(400).json({ message: "videoUrl not valid" });
   }
+
   try {
     const tutorial = await Tutorial.update(data, {
       where: { id: req.params.id },

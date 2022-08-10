@@ -25,21 +25,15 @@ const show = async (req, res) => {
 };
 
 const store = async (req, res) => {
-  let { firstName, lastName, email, password, address, phone } = req.body;
+  let { username, email, password } = req.body;
   try {
     const user = await User.create({
-      firstName,
-      lastName,
+      username,
       email,
       password,
-      address,
-      phone,
     });
-    let response = {
-      ...user,
-      accessToken: makeToken(user.email, user.id),
-    };
-    res.status(201).json(response);
+    user.accessToken = makeToken(user.email, user.id);
+    res.status(201).json(user);
   } catch (error) {
     console.log("error store user", error);
     res.status(500).json({ message: "server internal errors" });

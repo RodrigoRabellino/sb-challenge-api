@@ -5,16 +5,11 @@ faker.locale = "es";
 module.exports = async () => {
   const users = [];
   for (let i = 0; i < 5; i++) {
-    let firstName = faker.name.firstName();
-    let lastName = faker.name.lastName();
-    let email = faker.internet.email(
-      firstName,
-      lastName + i,
-      "sbchallenge.com"
-    );
+    let username = faker.internet.userName();
+    let email = faker.internet.exampleEmail(username + i);
     let password = "1234";
 
-    users.push({ firstName, lastName, email, password });
+    users.push({ username, email, password });
   }
   await User.bulkCreate(users);
   console.log("[Database] users seeders ok");
