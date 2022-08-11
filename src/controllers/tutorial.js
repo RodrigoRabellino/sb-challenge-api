@@ -1,12 +1,20 @@
 const { Tutorial, User } = require("../db/connection");
 const validUrl = require("valid-url");
+const { Op } = require("sequelize");
 
 const index = async (req, res) => {
+  const options = {
+    include: { attributes: ["username"], model: User },
+    where: { publishedStatus: true },
+    order: [["CreatedAt", "DESC"]],
+  };
+
+  if (req.query.search && req.query.search !== "") {
+    options.where.title = { [Op.like]: `%${req.query.search}%` };
+  }
+
   try {
-    const tutorials = await Tutorial.findAll({
-      include: { attributes: ["username"], model: User },
-      order: [["CreatedAt", "DESC"]],
-    });
+    const tutorials = await Tutorial.findAll(options);
     res.status(200).json(tutorials);
   } catch (error) {
     console.log("error index tutorials", error);
