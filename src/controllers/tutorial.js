@@ -4,8 +4,8 @@ const validUrl = require("valid-url");
 const index = async (req, res) => {
   try {
     const tutorials = await Tutorial.findAll({
-      include: { attributes: ["firstName", "lastName"], model: User },
-      order: [["CreatedAt", "ASC"]],
+      include: { attributes: ["username"], model: User },
+      order: [["CreatedAt", "DESC"]],
     });
     res.status(200).json(tutorials);
   } catch (error) {
@@ -18,7 +18,7 @@ const show = async (req, res) => {
   const { id } = req.params;
   try {
     const tutorial = await Tutorial.findByPk(id, {
-      include: { attributes: ["firstName", "lastName"], model: User },
+      include: { attributes: ["username"], model: User },
     });
     res.status(200).json(tutorial);
   } catch (error) {
@@ -50,9 +50,9 @@ const store = async (req, res) => {
 };
 
 const update = async (req, res) => {
-  let { title, description, videoUrl, publishedStatus, userId } = req.body;
+  const { title, description, videoUrl, publishedStatus, userId } = req.body;
 
-  data = {
+  const data = {
     title,
     description,
     videoUrl,
