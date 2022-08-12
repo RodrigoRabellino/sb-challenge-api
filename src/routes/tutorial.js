@@ -1,4 +1,5 @@
 const tutorialRoutes = require("express").Router();
+const isTokenExpired = require("../middlewares/isTokenExpired");
 const {
   index,
   show,
@@ -9,7 +10,7 @@ const {
 } = require("../controllers/tutorial");
 
 tutorialRoutes.get("/", index);
-tutorialRoutes.post("/", store);
+tutorialRoutes.post("/", isTokenExpired, store);
 tutorialRoutes.put("/:id", update);
 tutorialRoutes.get("/:id", show);
 tutorialRoutes.delete("/mass_delete", destroyAll);

@@ -43,6 +43,14 @@ const update = async (req, res) => {};
 
 const destroy = async (req, res) => {};
 
+const sendToken = (req, res) => {
+  const createdAt = new Date();
+  const accessToken = jwt.sign({ createdAt }, process.env.SECRET_JWT_USER, {
+    expiresIn: "5m",
+  });
+  res.status(201).json({ accessToken });
+};
+
 const makeToken = (email, id) => {
   return jwt.sign({ email, id }, process.env.SECRET_JWT_USER);
 };
@@ -53,4 +61,5 @@ module.exports = {
   store,
   update,
   destroy,
+  sendToken,
 };
