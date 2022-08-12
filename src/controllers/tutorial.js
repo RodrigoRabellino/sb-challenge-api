@@ -87,8 +87,25 @@ const update = async (req, res) => {
     res.status(500).json({ message: "server internal errors" });
   }
 };
+//not destroy, is a soft delete
+const destroy = async (req, res) => {
+  try {
+    const deleteAt = new Date();
+    console.log(deleteAt);
+    const tutorial = await Tutorial.update(
+      {
+        deleteAt,
+        publishedStatus: false,
+      },
+      { where: { id: req.params.id } }
+    );
 
-const destroy = async (req, res) => {};
+    res.status(200).json("Tutorial deleted");
+  } catch (error) {
+    console.log("error delete tutorial", error);
+    res.status(500).json({ message: "server internal errors" });
+  }
+};
 
 module.exports = {
   index,

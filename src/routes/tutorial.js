@@ -10,7 +10,7 @@ const {
 tutorialRoutes.get("/", index);
 tutorialRoutes.post("/", store);
 tutorialRoutes.put("/:id", update);
-tutorialRoutes.delete("/", destroy);
 tutorialRoutes.get("/:id", show);
+tutorialRoutes.delete("/:id", destroy);
 
 module.exports = tutorialRoutes;

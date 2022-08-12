@@ -1,4 +1,4 @@
-const { DATEONLY } = require("sequelize");
+const { DATE } = require("sequelize");
 
 module.exports = (sequelize, Model, DataTypes) => {
   class Tutorial extends Model {}
@@ -24,7 +24,7 @@ module.exports = (sequelize, Model, DataTypes) => {
         allowNull: false,
       },
       deleteAt: {
-        type: DATEONLY,
+        type: DATE,
       },
     },
     {
