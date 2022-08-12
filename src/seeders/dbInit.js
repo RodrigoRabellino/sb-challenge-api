@@ -1,6 +1,7 @@
 const { sequelize } = require("../db/connection");
 
-module.exports = async (active) => {
+module.exports = async () => {
+  let active = false;
   if (active) {
     try {
       await sequelize.sync({ force: true });
@@ -11,5 +12,6 @@ module.exports = async (active) => {
     } catch (error) {
       console.log("error in dbInit", error);
     }
+    active = false;
   }
 };

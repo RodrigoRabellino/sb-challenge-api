@@ -13,10 +13,9 @@ const index = async (req, res) => {
 
 const show = async (req, res) => {
   const { id } = req.params;
+  // include: [{ model: Tutorial }],
   try {
-    const user = await User.findByPk(id, {
-      include: [{ model: Tutorial }],
-    });
+    const user = await User.findByPk(id);
     res.status(200).json(user);
   } catch (error) {
     console.log("error show user", error);

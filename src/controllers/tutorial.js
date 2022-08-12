@@ -3,8 +3,8 @@ const validUrl = require("valid-url");
 const { Op } = require("sequelize");
 
 const index = async (req, res) => {
+  //include: { attributes: ["username"], model: User },
   const options = {
-    include: { attributes: ["username"], model: User },
     where: { publishedStatus: true },
     order: [["CreatedAt", "DESC"]],
   };
@@ -23,11 +23,10 @@ const index = async (req, res) => {
 };
 
 const show = async (req, res) => {
+  // include: { attributes: ["username"], model: User },
   const { id } = req.params;
   try {
-    const tutorial = await Tutorial.findByPk(id, {
-      include: { attributes: ["username"], model: User },
-    });
+    const tutorial = await Tutorial.findByPk(id);
     res.status(200).json(tutorial);
   } catch (error) {
     console.log("error show tutorial", error);
@@ -36,7 +35,7 @@ const show = async (req, res) => {
 };
 
 const store = async (req, res) => {
-  let { title, description, videoUrl, publishedStatus, userId } = req.body;
+  let { title, description, videoUrl, publishedStatus } = req.body;
 
   if (!validUrl.isWebUri(videoUrl)) {
     return res.status(400).json({ message: "videoUrl not valid" });
@@ -48,7 +47,6 @@ const store = async (req, res) => {
       description,
       videoUrl,
       publishedStatus,
-      userId,
     });
     res.status(201).json(tutorial);
   } catch (error) {
@@ -58,13 +56,12 @@ const store = async (req, res) => {
 };
 
 const update = async (req, res) => {
-  const { title, description, videoUrl, publishedStatus, userId } = req.body;
+  const { title, description, videoUrl, publishedStatus } = req.body;
   const data = {
     title,
     description,
     videoUrl,
     publishedStatus,
-    userId,
   };
 
   Object.keys(data).forEach((key) => {

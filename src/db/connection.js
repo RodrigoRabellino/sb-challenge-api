@@ -15,7 +15,7 @@ const sequelize = new Sequelize(
 const User = require("./models/User")(sequelize, Model, DataTypes);
 const Tutorial = require("./models/Tutorial")(sequelize, Model, DataTypes);
 
-User.hasMany(Tutorial);
-Tutorial.belongsTo(User);
+// User.hasMany(Tutorial);
+// Tutorial.belongsTo(User);
 
 module.exports = { sequelize, User, Tutorial };
