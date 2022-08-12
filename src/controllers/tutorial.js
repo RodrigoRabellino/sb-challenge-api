@@ -59,7 +59,6 @@ const store = async (req, res) => {
 
 const update = async (req, res) => {
   const { title, description, videoUrl, publishedStatus, userId } = req.body;
-
   const data = {
     title,
     description,
@@ -83,7 +82,7 @@ const update = async (req, res) => {
     });
     res.status(200).json(tutorial);
   } catch (error) {
-    console.log("error store tutorial", error);
+    console.log("error update tutorial", error);
     res.status(500).json({ message: "server internal errors" });
   }
 };
@@ -91,7 +90,6 @@ const update = async (req, res) => {
 const destroy = async (req, res) => {
   try {
     const deleteAt = new Date();
-    console.log(deleteAt);
     const tutorial = await Tutorial.update(
       {
         deleteAt,
@@ -107,10 +105,29 @@ const destroy = async (req, res) => {
   }
 };
 
+const destroyAll = async (req, res) => {
+  try {
+    const deleteAt = new Date();
+    const tutorial = await Tutorial.update(
+      {
+        deleteAt,
+        publishedStatus: false,
+      },
+      { where: { deleteAt: null } }
+    );
+
+    res.status(200).json("Tutorials deleted");
+  } catch (error) {
+    console.log("error delete tutorial", error);
+    res.status(500).json({ message: "server internal errors" });
+  }
+};
+
 module.exports = {
   index,
   show,
   store,
   update,
   destroy,
+  destroyAll,
 };
