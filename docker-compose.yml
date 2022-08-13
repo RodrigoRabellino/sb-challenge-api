@@ -22,5 +22,7 @@ services:
       - DB_HOST=mysqldb
       - DB_DIALECT=mysql
       - DB_PORT=3306
+    ports:
+      - 3000:3000
 volumes:
   db:

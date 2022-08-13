@@ -1,12 +1,12 @@
-const { sequelize } = require("../db/connection");
+const { sequelize, Tutorial, User } = require("../db/connection");
 
 module.exports = async () => {
-  let active = false;
+  let active = true;
   if (active) {
+    await sequelize.sync();
     try {
-      await sequelize.sync({ force: true });
       console.log("[Database] tables created");
-      await require("./userSeeder")();
+      // await require("./userSeeder")();
       await require("./tutorialSeeder")();
       console.log("[Database] correct seed");
     } catch (error) {
