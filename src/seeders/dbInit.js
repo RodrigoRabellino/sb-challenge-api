@@ -5,7 +5,7 @@ module.exports = async (active) => {
   console.log("[Database] tables created");
   if (active) {
     try {
-      // await require("./userSeeder")();
+      await require("./userSeeder")();
       await require("./tutorialSeeder")();
       console.log("[Database] correct seed");
     } catch (error) {
