@@ -17,7 +17,6 @@ const index = async (req, res) => {
       },
     };
   }
-  console.log(options);
   try {
     const tutorials = await Tutorial.findAll(options);
     res.status(200).json(tutorials);
