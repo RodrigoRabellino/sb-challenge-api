@@ -3,7 +3,6 @@ const validUrl = require("valid-url");
 const { Op } = require("sequelize");
 
 const index = async (req, res) => {
-  //include: { attributes: ["username"], model: User },
   const options = {
     where: { publishedStatus: true },
     order: [["CreatedAt", "DESC"]],
@@ -23,7 +22,6 @@ const index = async (req, res) => {
 };
 
 const show = async (req, res) => {
-  // include: { attributes: ["username"], model: User },
   const { id } = req.params;
   try {
     const tutorial = await Tutorial.findByPk(id);
