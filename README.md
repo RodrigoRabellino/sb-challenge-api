@@ -1,5 +1,9 @@
 # sb-challenge-api
 
+## Project setup with Docker
+```
+docker-compose up
+```
 
 ## Project setup without Docker
 
@@ -11,8 +15,4 @@ npm install
 ### Run api 
 ```
 node .
-```
-## Project setup with Docker
-```
-docker-compose up
 ```

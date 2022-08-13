@@ -1,11 +1,10 @@
 const { sequelize, Tutorial, User } = require("../db/connection");
 
-module.exports = async () => {
-  let active = true;
+module.exports = async (active) => {
+  await sequelize.sync();
+  console.log("[Database] tables created");
   if (active) {
-    await sequelize.sync();
     try {
-      console.log("[Database] tables created");
       // await require("./userSeeder")();
       await require("./tutorialSeeder")();
       console.log("[Database] correct seed");
