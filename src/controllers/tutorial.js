@@ -9,9 +9,15 @@ const index = async (req, res) => {
   };
 
   if (req.query.search && req.query.search !== "") {
-    options.where.title = { [Op.like]: `%${req.query.search}%` };
+    options.where = {
+      ...options.where,
+      [Op.or]: {
+        title: { [Op.like]: `%${req.query.search}%` },
+        description: { [Op.like]: `%${req.query.search}%` },
+      },
+    };
   }
-
+  console.log(options);
   try {
     const tutorials = await Tutorial.findAll(options);
     res.status(200).json(tutorials);
