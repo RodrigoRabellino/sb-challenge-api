@@ -15,7 +15,6 @@ const sequelize = new Sequelize(
 const User = require("./models/User")(sequelize, Model, DataTypes);
 const Tutorial = require("./models/Tutorial")(sequelize, Model, DataTypes);
 
-//out of scope
 User.hasMany(Tutorial);
 Tutorial.belongsTo(User);
 

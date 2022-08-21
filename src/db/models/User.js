@@ -36,5 +36,13 @@ module.exports = (sequelize, Model, DataTypes) => {
     }
   });
 
+  User.prototype.validatePass = async (pass, userPass) => {
+    try {
+      return bcrypt.compare(pass, userPass);
+    } catch (error) {
+      return false;
+    }
+  };
+
   return User;
 };

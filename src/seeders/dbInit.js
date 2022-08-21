@@ -1,7 +1,7 @@
 const { sequelize, Tutorial, User } = require("../db/connection");
 
 module.exports = async (active) => {
-  await sequelize.sync();
+  await sequelize.sync({ force: true });
   console.log("[Database] tables created");
   if (active) {
     try {
