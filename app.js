@@ -12,6 +12,6 @@ app.use(express.urlencoded({ extended: true }));
 
 Router(app);
 //set in true to generate random entries.
-dbInit(true);
+dbInit(false);
 
 app.listen(port, () => console.log("listen port: ", port));

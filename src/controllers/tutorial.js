@@ -6,6 +6,7 @@ const index = async (req, res) => {
   const options = {
     where: { publishedStatus: true },
     order: [["CreatedAt", "DESC"]],
+    include: { attributes: ["username"], model: User },
   };
 
   if (req.query.search && req.query.search !== "") {

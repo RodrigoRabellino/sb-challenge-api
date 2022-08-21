@@ -11,6 +11,6 @@ module.exports = async () => {
 
     users.push({ username, email, password });
   }
-  await User.bulkCreate(users);
+  await User.bulkCreate(users, { individualHooks: true });
   console.log("[Database] users seeders ok");
 };
