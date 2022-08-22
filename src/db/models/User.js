@@ -38,7 +38,8 @@ module.exports = (sequelize, Model, DataTypes) => {
 
   User.prototype.validatePass = async (pass, userPass) => {
     try {
-      return bcrypt.compare(pass, userPass);
+      const isValid = await bcrypt.compare(pass, userPass);
+      return isValid;
     } catch (error) {
       return false;
     }
